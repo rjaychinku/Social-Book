@@ -1,0 +1,68 @@
+<div class="row">
+
+    <!-- PROFILE SECTION -->
+    <div class="col-lg-4 mb-2">
+        <div class="card">
+            <img src="../../assets/homepic.jpeg" class="rounded-circle" alt="Profile picture">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"> <b> <span class="sr-only">({{totalPosts}})</span></b> Posts</li>
+                <li class="list-group-item"> <b> <span class="sr-only">({{totalConnections}})</span></b> Connections
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="col-lg-8">
+        <div class="row">
+            <!-- POSTING SECION -->
+            <div class="input-group" style="width: 500px; background-color: white; padding-left: 0;">
+                <input  type="text" [(ngModel)]="PostContentTyped" class="form-control"
+                    placeholder="Write a post" aria-label="Write a post/upload a picture"
+                    aria-describedby="basic-addon2">
+                <div class="input-group-append" style="margin-left: 10px;">
+                    <button [disabled]="PostContentTyped.length < 1" (click)="PostContent()"
+                        class="btn btn btn-outline-primary" type="button">Post</button>
+           
+                </div>
+            </div>
+
+            <table class="table table-striped">
+                <h5>My posts</h5>
+                <tbody>
+                    <!-- order by created date -->
+                    <tr *ngFor="let post of posts" [@fadeSlideInOut]="onLoad">
+                        <td>
+                            {{post['post']}} <br>
+                            <i style="font-size: smaller ;">{{post['createdDate'] | date : 'medium'}}</i>
+                        </td>
+                        <td>
+                            <button (click)="deletePost(post['_id'])" class="btn btn-outline-secondary btn-sm"
+                                style="float: right;" type="button">Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-light">
+                <h5>Timeline</h5>
+                <tbody>
+                    <!-- order by created date -->
+                    <tr *ngFor="let post of friendsPosts" [@fadeSlideInOut]="onLoad">
+                        <td>
+                            <b>
+                                {{post['userName']}} <br>
+                            </b>
+                            {{post['post']}} <br>
+                            <i style="font-size: smaller ;float: right;">{{post['createdDate'] | date : 'medium'}}</i>
+                        </td>
+                        <td *ngIf="isAdmin">
+                            <button (click)="deletePost(post['_id'])" class="btn btn-outline-secondary btn-sm"
+                                style="float: right;" type="button">Hide</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+<ng-http-loader></ng-http-loader>

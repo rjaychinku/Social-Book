@@ -1,0 +1,43 @@
+.rounded-circle {
+    width : 300px;
+    height: 250px;
+}
+
+.table {
+    max-width          : 710px;
+    background-color   : white;
+    padding-left       : 0px;
+    padding-right      : 0px;
+    margin-top         : 20px;
+    border-collapse    : separate;
+    border-spacing     : 0 0.5em;
+}
+
+
+button{
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+
+tr,
+td {
+    padding-left  : 10px;
+    padding-top   : 0px;
+    padding-bottom: 0px;
+}
+
+img,
+ul,
+.col-3,
+.col-9 {
+    margin: auto;
+}
+
+li {
+    width: 250px;
+}
+
+.card {
+    max-width  : 30rem;
+    padding-top: 10px;
+}

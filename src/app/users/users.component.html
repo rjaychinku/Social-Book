@@ -1,0 +1,50 @@
+<div class="row">
+
+    <!-- PROFILE SECTION -->
+    <div class="col-lg-4 mb-2">
+        <div class="card">
+            <img src="../../assets/homepic.jpeg" class="rounded-circle" alt="Profile picture">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"> <b> <span class="sr-only">({{totalPosts}})</span></b> Posts</li>
+                <li class="list-group-item"> <b> <span class="sr-only">({{totalConnections}})</span></b> Connections
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="col-lg-8">
+        <table class="table">
+            <tbody>
+                <tr *ngFor="let regUser of registeredUsers" style="background-color: bisque;">
+                    <td>
+                        <div class="row" style="background-color: azure;">
+                            <div class="col-3">
+                                <label style="font-size: medium;">{{regUser.firstName + ' ' + regUser.lastName}}
+                                </label>
+                            </div>
+                            <div class="col-3">
+                                <label style="font-size: medium;">Status: {{regUser.isActive == true ? 'Active' :
+                                    'Inactive'}}
+                                </label>
+                            </div>
+                            <div *ngIf="regUser.isActive" class="col-3">
+                                <button (click)="blockUser(regUser)" class="btn btn-outline-secondary btn-md"
+                                    type="button">Block</button>
+                            </div>
+                            <div *ngIf="!regUser.isActive" class="col-3">
+                                <button (click)="unblockUser(regUser)" class="btn btn-outline-secondary btn-md"
+                                    type="button">Unblock</button>
+                            </div>
+                            <div class="col-3">
+                                <button style="float: right;" routerLink="/settings/{{regUser._id}}"
+                                    class="btn btn-outline-primary btn-md" type="button">Manage Profile</button>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+<ng-http-loader></ng-http-loader>

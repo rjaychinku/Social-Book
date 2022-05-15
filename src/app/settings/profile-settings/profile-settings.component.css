@@ -1,0 +1,16 @@
+input{
+    width: 300px;
+    margin-top: 10px;
+}
+
+button{
+    width: 200px;
+    margin-top: 10px;
+    float: left;
+}
+
+.col-12,
+.col-6,
+.col-4 {
+   margin-top: 10px;
+}

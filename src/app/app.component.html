@@ -1,0 +1,29 @@
+<div class="container-fluid">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
+    <a class="navbar-brand" routerLinkActive="active" [routerLink]="['']">FBook</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+      aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse">
+      <div class="navbar-nav">
+        <a *ngIf="isAuthenticated" class="nav-item nav-link" routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }" [routerLink]="['']">Home (<b>{{user.firstName}}</b>)</a>
+        <a *ngIf="isAuthenticated" class="nav-item nav-link" routerLinkActive="active" [routerLink]="['friends']">Friends</a>
+        <a *ngIf="isAuthenticated && isAdmin" class="nav-item nav-link" routerLinkActive="active" [routerLink]="['users']">Users</a>
+        <a *ngIf="isAuthenticated" class="nav-item nav-link" routerLinkActive="active" [routerLink]="['network']">Network</a>
+        <a *ngIf="isAuthenticated" class="nav-item nav-link" routerLinkActive="active" routerLink="/settings/{{user._id}}">Settings</a>
+
+        <a *ngIf="!isAuthenticated" class="nav-item nav-link" routerLinkActive="active" [routerLink]="['registration']">Register</a>
+        <a *ngIf="!isAuthenticated" class="nav-item nav-link" routerLinkActive="active" [routerLink]="['login']">Login</a>
+
+        <a *ngIf="isAuthenticated" type="button" class="nav-item nav-link" (click)="logout()">Logout</a>
+      </div>
+    </div>
+  </nav>
+
+</div>
+
+<div class="container-fluid">
+  <router-outlet></router-outlet>
+</div>

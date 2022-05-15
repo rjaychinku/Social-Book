@@ -1,0 +1,40 @@
+<div class="row">
+    <div class="text-center">
+        <h3>
+            Login
+        </h3>
+    </div>
+    <div class="row justify-content-center">
+        <div class="form-group col-md-5 align-center" style="background-color: beige;">
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate>
+
+                <div class="col-8">
+                    <input type="email" formControlName="email" class="form-control" placeholder="Email"
+                        [ngClass]="{ 'is-invalid': loginForm.get('email')?.errors && loginForm.get('email')?.touched}">
+
+                    <div *ngIf="loginForm.get('email')?.errors && loginForm.get('email')?.touched" class="text-danger">
+                        <div *ngIf="loginForm.get('email')?.errors?.['required']">Email is required</div>
+                        <div *ngIf="loginForm.get('email')?.errors?.['email']">Enter a valid email address</div>
+                    </div>
+                </div>
+
+                <div class="col-8">
+                    <input type="password" formControlName="password" class="form-control" placeholder="Password"
+                        [ngClass]="{ 'is-invalid': loginForm.get('password')?.errors && loginForm.get('password')?.touched}">
+
+                    <div *ngIf="loginForm.get('password')?.errors && loginForm.get('password')?.touched"
+                        class="text-danger">
+                        <div *ngIf="loginForm.get('password')?.errors?.['required']">Password is required</div>
+                        <div *ngIf="loginForm.get('password')?.errors?.['minlength']">Password must be at least 6
+                            characters</div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <button [disabled]="loginForm.invalid" class="btn btn-outline-primary btn-m mr-1">Login</button>
+                </div>
+                <div class="mt-50 text-left"><a routerLink="/forgotPassword" class="btn btn-link">Forgot Password</a></div>
+            </form>
+        </div>
+    </div><ng-http-loader></ng-http-loader>
+</div>

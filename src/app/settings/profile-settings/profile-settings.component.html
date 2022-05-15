@@ -1,0 +1,56 @@
+<div *ngIf="errorMsg" class="alert alert-danger mt-2">{{errorMsg}}</div>
+<div *ngIf="succssMsg" class="alert alert-success mt-2">{{message}}</div>
+<form [formGroup]="profileSettingsForm" (ngSubmit)="onSubmit()">
+
+<div class="form-group">
+   <input type="text" formControlName="firstName" class="form-control input-lg" placeholder="First Name"
+   [ngClass]="{ 'is-invalid': profileSettingsForm.get('firstName')?.touched && profileSettingsForm.get('firstName')?.errors }" [(ngModel)]="userDetails.firstName" />
+   <div *ngIf="profileSettingsForm.get('firstName')?.touched && profileSettingsForm.get('firstName')?.errors" class="invalid-feedback">
+      <div *ngIf="profileSettingsForm.get('firstName')?.errors?.['required']">First Name is required</div>
+   </div>
+</div>
+<div class="form-group">
+   <input type="text" formControlName="lastName" class="form-control input-lg" placeholder="Last Name"
+   [ngClass]="{ 'is-invalid': profileSettingsForm.get('lastName')?.touched &&  profileSettingsForm.get('lastName')?.errors }" [(ngModel)]="userDetails.lastName"/>
+   <div *ngIf="profileSettingsForm.get('lastName')?.touched && profileSettingsForm.get('lastName')?.errors" class="invalid-feedback">
+      <div *ngIf="profileSettingsForm.get('lastName')?.errors?.['required']">Last Name is required</div>
+   </div>
+</div>
+
+<div class="form-group">
+   <input type="date" formControlName="dob" [ngModel]="userDetails.dob  | date:'yyyy-MM-dd'" (ngModelChange)="userDetails.dob = $event"
+   class="form-control input-lg" placeholder="DOB" 
+   [ngClass]="{ 'is-invalid': profileSettingsForm.get('dob')?.touched && profileSettingsForm.get('dob')?.errors }" />
+   <div *ngIf="profileSettingsForm.get('dob')?.touched && profileSettingsForm.get('dob')?.errors" class="invalid-feedback">
+      <div *ngIf="profileSettingsForm.get('dob')?.errors?.['required']">DOB is required</div>
+   </div>
+</div>
+
+<div class="form-group" style="text-align: left;">
+   <label class="md-check mr-2" style="margin-right: 15px;">
+   <input style="width: 10px;" type="radio" value="male" name="gender" formControlName="gender" [(ngModel)]="userDetails.gender"> Male
+   </label>
+   <label class="md-check">
+   <input style="width: 10px;" type="radio" value="female" name="gender" formControlName="gender" [(ngModel)]="userDetails.gender"> Female
+   </label>
+</div>
+<div *ngIf="isAdmin" class="form-group" style="text-align: left;">
+   <label class="md-check mr-2" style="margin-right: 15px;">
+   <input style="width: 10px;" type="radio" value="true" name="isAdmin" formControlName="isAdmin" [(ngModel)]="userDetails.isAdmin"> Admin
+   </label>
+   <label class="md-check">
+   <input style="width: 10px;" type="radio" value="false" name="isAdmin" formControlName="isAdmin" [(ngModel)]="userDetails.isAdmin"> Normal user
+   </label>
+</div>
+<div class="form-group">
+   <input type="text" formControlName="email" class="form-control input-lg" placeholder="Email"
+   [ngClass]="{ 'is-invalid': profileSettingsForm.get('email') && profileSettingsForm.get('email')?.errors }" [(ngModel)]="userDetails.email"/>
+   <div *ngIf="profileSettingsForm.get('email')?.touched && profileSettingsForm.get('email')?.errors" class="invalid-feedback">
+      <div *ngIf="profileSettingsForm.get('email')?.errors?.['required']">Email is required</div>
+   </div>
+</div>
+<div class="text-center">
+   <button [disabled]="profileSettingsForm.invalid" class="btn btn-outline-primary btn-md">Update</button>
+</div>
+</form>
+<ng-http-loader></ng-http-loader>
