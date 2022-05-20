@@ -36,7 +36,7 @@
                             <i style="font-size: smaller ;">{{post['createdDate'] | date : 'medium'}}</i>
                         </td>
                         <td>
-                            <button (click)="deletePost(post['_id'])" class="btn btn-outline-secondary btn-sm"
+                            <button (click)="deletePost(post)" class="btn btn-outline-secondary btn-sm"
                                 style="float: right;" type="button">Delete</button>
                         </td>
                     </tr>
@@ -55,7 +55,7 @@
                             <i style="font-size: smaller ;float: right;">{{post['createdDate'] | date : 'medium'}}</i>
                         </td>
                         <td *ngIf="isAdmin">
-                            <button (click)="deletePost(post['_id'])" class="btn btn-outline-secondary btn-sm"
+                            <button (click)="deletePost(post)" class="btn btn-outline-secondary btn-sm"
                                 style="float: right;" type="button">Hide</button>
                         </td>
                     </tr>

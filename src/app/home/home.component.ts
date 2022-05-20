@@ -67,7 +67,7 @@ export class HomeComponent implements OnInit {
     let friends: [] = await this.friendsService.getFriendsById(this.loggedInUser._id);
     this.totalConnections = friends.length;
 
- 
+
     await this.updateAllPosts();
     this.friendsService.UpdateProfileData(this.totalConnections, this.totalPosts);
   }
@@ -83,30 +83,33 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  async deletePost(postId: string): Promise<void> {
+  async deletePost(post: any): Promise<void> {
 
-    await this.friendsService.deletePost(postId);
+    await this.friendsService.deletePost(post._id);
     this.posts = await this.usersService.getPostsByUserId(this.loggedInUser._id);
-    this.friendsService.UpdateProfileData(this.totalConnections, --this.totalPosts);
+
+    if (post.userId == this.loggedInUser._id)
+      this.friendsService.UpdateProfileData(this.totalConnections, --this.totalPosts);
+
     await this.updateAllPosts();
     this.toastService.success('Post deleted successfully', 'Deleted');
   }
 
   private async updateAllPosts(): Promise<void> {
 
-      this.friendsPosts = await this.friendsService.getAllPosts();
+    this.friendsPosts = await this.friendsService.getAllPosts();
 
-      this.friendsPosts = this.friendsPosts.sort((n1, n2) => {
-        if (n1.createdDate < n2.createdDate) {
-          return 1;
-        }
+    this.friendsPosts = this.friendsPosts.sort((n1, n2) => {
+      if (n1.createdDate < n2.createdDate) {
+        return 1;
+      }
 
-        if (n1.createdDate > n2.createdDate) {
-          return -1;
-        }
+      if (n1.createdDate > n2.createdDate) {
+        return -1;
+      }
 
-        return 0;
-      });
-    
+      return 0;
+    });
+
   }
 }

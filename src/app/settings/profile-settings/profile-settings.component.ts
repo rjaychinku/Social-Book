@@ -57,15 +57,12 @@ export class ProfileSettingsComponent implements OnInit {
   async onSubmit() {
 
     this.profileSettingsForm.value.id = this.profileUserId;
-    debugger;
-
     await this.friendsService.updateUser(this.profileUserId, this.profileSettingsForm.value);
-    debugger;
+
     if (this.profileSettingsForm.value['id'] == this.loggedInUser._id) {
 
       this.loggedInUser.isAdmin = this.profileSettingsForm.value['isAdmin'];
       this.usersService.saveUser(this.loggedInUser);
-      debugger;
     }
 
     this.toastService.success('Profile has been successfully updated', 'Profile');
