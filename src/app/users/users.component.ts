@@ -31,10 +31,7 @@ export class UsersComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     this.loggedInUser = this.usersService.getUser();
     this.usersService.saveUser(this.loggedInUser);
-    // let regUsers = new Array();
     this.registeredUsers = await this.friendService.getAllRegisteredUsers();
-    // debugger;
-    // this.registeredUsers = regUsers.filter(u => u.isActive == true);
   }
 
   blockUser(user: any): void {

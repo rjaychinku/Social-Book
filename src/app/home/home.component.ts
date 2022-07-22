@@ -15,7 +15,7 @@ import { FbookserviceService } from '../service/fbookservice.service';
         animate('1000ms', style({ opacity: 1, transform: 'translateY(0)' })),
       ]),
       transition(':leave', [
-        animate('1000ms', style({ opacity: 0, transform: 'translateY(10px)' })),
+        animate('1000ms', style({ opacity: 0, transform: 'translateY(5px)' })),
       ]),
     ]),
   ]
@@ -59,7 +59,6 @@ export class HomeComponent implements OnInit {
     this.loggedInUser = this.usersService.getUser();
     this.usersService.saveUser(this.loggedInUser);
     this.isAdmin = this.loggedInUser?.isAdmin;
-    //let PhotoImage = await this.friendsService.getPhotoById(this.loggedInUser?.photoId);
 
     this.posts = await this.usersService.getPostsByUserId(this.loggedInUser._id);
     this.totalPosts = this.posts.length;

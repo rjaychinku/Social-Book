@@ -30,7 +30,6 @@ export class FbooknetworkserviceService {
 
   async getAllRegisteredUsers(): Promise<any> {
     let result = await lastValueFrom(this.httpClient.get<any>(this.BASE_URL + 'users/'));
-
     return result;
   }
 

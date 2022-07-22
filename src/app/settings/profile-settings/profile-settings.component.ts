@@ -19,8 +19,8 @@ export class ProfileSettingsComponent implements OnInit {
   submitted = false;
   private profileUserId: string | null = '';
   loggedInUser: any;
-  isAdmin: boolean = false;
   profileUser: any;
+  loggedInUserisAdmin: boolean = false;
 
   constructor(private usersService: FbookserviceService,
     private friendsService: FbooknetworkserviceService,
@@ -42,15 +42,13 @@ export class ProfileSettingsComponent implements OnInit {
 
     this.loggedInUser = this.usersService.getUser();
     this.usersService.saveUser(this.loggedInUser);
-    this.isAdmin = this.loggedInUser?.isAdmin == true || this.loggedInUser?.isAdmin == "true";
+    this.loggedInUserisAdmin = this.loggedInUser?.isAdmin == true || this.loggedInUser?.isAdmin == "true";
 
     this.profileUserId = localStorage.getItem("profileUserId");
     this.userDetails = await this.friendsService.getUserById(this.profileUserId);
-    debugger;
   }
 
   updatedate(event: string | number | Date) {
-
     this.userDetails.dob = new Date(event);
   }
 
@@ -60,7 +58,6 @@ export class ProfileSettingsComponent implements OnInit {
     await this.friendsService.updateUser(this.profileUserId, this.profileSettingsForm.value);
 
     if (this.profileSettingsForm.value['id'] == this.loggedInUser._id) {
-
       this.loggedInUser.isAdmin = this.profileSettingsForm.value['isAdmin'];
       this.usersService.saveUser(this.loggedInUser);
     }

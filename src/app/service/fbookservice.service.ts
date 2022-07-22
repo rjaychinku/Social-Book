@@ -35,29 +35,32 @@ export class FbookserviceService {
 
   async register(registeredUser: RegisterUser): Promise<any> {
     let result = await lastValueFrom(this.httpClient.post<RegisterUser>(this.BASE_URL + 'users/register', registeredUser));
-
     return result;
   }
 
   async login(loginUser: LoginUser): Promise<any> {
 
     let user = await lastValueFrom(this.httpClient.post<LoginUser>(this.BASE_URL + 'users/authenticate', loginUser));
- debugger;
-    localStorage.setItem('user', JSON.stringify(user));
-    this.loggedInUserSubject.next(user);
+    this.saveUser(user);
 
     return user;
   }
 
   logout(): void {
     this.loggedInUserSubject.next(null);
-    localStorage.removeItem('user');
+    this.clearLocalStorage();
     this.router.navigate(['login']);
   }
 
   saveUser(user: any): void {
     this.loggedInUserSubject.next(user);
     localStorage.setItem('user', JSON.stringify(user));
+  }
+
+  private clearLocalStorage(): void {
+    localStorage.removeItem('tempUserId');
+    localStorage.removeItem('profileUserId');
+    localStorage.removeItem('user');
   }
 
   getUser(): any | null {

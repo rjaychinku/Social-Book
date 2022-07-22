@@ -34,7 +34,7 @@
    <input style="width: 10px;" type="radio" value="female" name="gender" formControlName="gender" [(ngModel)]="userDetails.gender"> Female
    </label>
 </div>
-<div *ngIf="isAdmin" class="form-group" style="text-align: left;">
+<div *ngIf="loggedInUserisAdmin" class="form-group" style="text-align: left;">
    <label class="md-check mr-2" style="margin-right: 15px;">
    <input style="width: 10px;" type="radio" value="true" name="isAdmin" formControlName="isAdmin" [(ngModel)]="userDetails.isAdmin"> Admin
    </label>
@@ -42,6 +42,7 @@
    <input style="width: 10px;" type="radio" value="false" name="isAdmin" formControlName="isAdmin" [(ngModel)]="userDetails.isAdmin"> Normal user
    </label>
 </div>
+{{userDetails | json}}
 <div class="form-group">
    <input type="text" formControlName="email" class="form-control input-lg" placeholder="Email"
    [ngClass]="{ 'is-invalid': profileSettingsForm.get('email') && profileSettingsForm.get('email')?.errors }" [(ngModel)]="userDetails.email"/>

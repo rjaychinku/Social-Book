@@ -13,13 +13,19 @@ export class SettingsComponent implements OnInit {
   constructor(private userService: FbookserviceService, private friendService: FbooknetworkserviceService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    let incomingUserId: string = this.route.snapshot.params['userId'];
-    let storedUser: any = this.userService.getUser();
+    debugger;
+    // let incomingUserId: string;
+    // let clickedUrl = this.route.snapshot.routeConfig?.['path'];
 
-    if (incomingUserId != storedUser._id) {
-      localStorage.setItem("profileUserId", incomingUserId);
-    }
+    // if (clickedUrl?.includes('setting')) {
+    //   incomingUserId = this.userService.getUser()?._id
+    // }
+    // else {
+    //   //came from somehere else
+    //   incomingUserId = this.route.snapshot.params['userId'];
+    // }
 
+    localStorage.setItem("profileUserId", this.route.snapshot.params['userId']);
   }
 
   updateProfile() {

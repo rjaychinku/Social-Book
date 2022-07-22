@@ -46,7 +46,6 @@ export class ForgotPasswordComponent implements OnInit {
       let userByEmail: any = await this.friendService.findUserByEmail(email);
 
       if (userByEmail?.length > 0) {
-        debugger;
         localStorage.setItem("tempUserId", userByEmail[0]?._id);
         this.router.navigate(['resetPassword']);
       }
